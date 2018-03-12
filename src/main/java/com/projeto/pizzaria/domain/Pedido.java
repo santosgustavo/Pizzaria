@@ -19,7 +19,7 @@ public class Pedido implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	private String observacao;
 	private double valor;
 	private String tipo_pagamento;
