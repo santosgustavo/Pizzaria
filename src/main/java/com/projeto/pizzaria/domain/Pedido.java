@@ -1,14 +1,43 @@
 package com.projeto.pizzaria.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Pedido implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String observacao;
 	private double valor;
 	private String tipo_pagamento;
+	
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
+	
+	@ManyToMany
+	@JoinTable(name="PEDIDO_PRODUTO",
+			joinColumns = @ JoinColumn(name="pedido_id"),
+			inverseJoinColumns = @JoinColumn(name="produto_id")
+			)
+	private List<Produto> produtos = new ArrayList<>();
 	
 	public Pedido() {
 		
